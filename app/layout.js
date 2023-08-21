@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Header from "./(Header)/Header";
+import Providers from "@/Redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
+    <Providers>
         <Header />
         {children}
+    </Providers>
       </body>
     </html>
   );
