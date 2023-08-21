@@ -12,7 +12,7 @@ import moment from "moment/moment";
 import Layer from "./Layer";
 import { useDispatch, useSelector } from "react-redux";
 
-const SingleTodo = () => {
+const SingleTodo = ({setEditTodo}) => {
   const [showText, setShowText] = useState(false);
   const [showFullText, setShowFullText] = useState("");
 
@@ -24,7 +24,12 @@ const SingleTodo = () => {
 
   const todo = useSelector(state => state.todo.todoList)
   const dispatch = useDispatch(null)
+  const updateTodo = (todo) => {
+    setEditTodo(todo)
+
+  }
   return (
+
     <div id="grid">
       {todo.map((todo, i) => (
         <div key={i} className="bg-todo p-2 rounded-md w-full h-full">
@@ -53,7 +58,9 @@ const SingleTodo = () => {
               className="cursor-pointer hover:text-slate-500">
                 <AiTwotoneDelete />
               </span>
-              <span className="cursor-pointer hover:text-slate-500">
+              <span
+              onClick={() => {dispatch(updateTodo(todo))}}
+               className="cursor-pointer hover:text-slate-500">
                 <AiTwotoneEdit />
               </span>
               <span className="cursor-pointer hover:text-slate-500">

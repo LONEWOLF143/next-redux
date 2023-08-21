@@ -23,6 +23,7 @@ const Todo = () => {
     let emoji = String.fromCodePoint(...codeArray);
     setText(text + emoji);
   };
+  console.log(editTodo)
   const handleSubmit = (e) => {
     e.preventDefault()
       dispatch(
