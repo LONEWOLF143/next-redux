@@ -6,11 +6,14 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import SingleTodo from "@/components/Todo";
+import { useDispatch } from "react-redux";
+import { addTodo } from "@/Redux/Slices/TodoSlice";
 
 const Todo = () => {
   const [showEmoji, setShowEmoji] = useState(false);
   const [text, setText] = useState("");
   const [editTodo, setEditTodo] = useState(null);
+  const dispatch = useDispatch(null)
 
   // add emoji
   const addEmoji = (e) => {
@@ -20,6 +23,20 @@ const Todo = () => {
     let emoji = String.fromCodePoint(...codeArray);
     setText(text + emoji);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault()
+      dispatch(
+        addTodo({
+          id: Math.floor(Math.random() * 100000),
+          text: 'hellow redux',
+          date: new Date(),
+          completed: false
+
+
+        })
+      )
+      setText("")
+  }
 
   return (
     <div className="pt-3rem w-[90%] sm:w-[70%] md:w-[60%] lg:w-[40%] mx-auto mt-[11rem]">
@@ -28,7 +45,7 @@ const Todo = () => {
       </h1>
 
       {/* todo input  */}
-      <form className="flex items-start gap-2 pt-2rem">
+      <form onSubmit={handleSubmit} className="flex items-start gap-2 pt-2rem">
         <div className="w-full flex items-end p-2 bg-todo rounded-sm relative">
           <textarea
             value={text}

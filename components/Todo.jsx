@@ -5,10 +5,12 @@ import {
   AiOutlineCheckCircle,
 } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
+import { deleteTodo } from "@/Redux/Slices/TodoSlice";
 
 import React, { useState } from "react";
 import moment from "moment/moment";
 import Layer from "./Layer";
+import { useDispatch, useSelector } from "react-redux";
 
 const SingleTodo = () => {
   const [showText, setShowText] = useState(false);
@@ -20,21 +22,8 @@ const SingleTodo = () => {
     setShowText(true);
   };
 
-  const todo = [
-    {
-      id: 1,
-      text: "Hello world",
-      date: new Date(),
-      completed: false,
-    },
-    {
-      id: 2,
-      text: "Hello world",
-      date: new Date(),
-      completed: false,
-    },
-  ];
-
+  const todo = useSelector(state => state.todo.todoList)
+  const dispatch = useDispatch(null)
   return (
     <div id="grid">
       {todo.map((todo, i) => (
@@ -59,7 +48,9 @@ const SingleTodo = () => {
             </h1>
 
             <div className="flex items-center justify-end gap-1 py-2">
-              <span className="cursor-pointer hover:text-slate-500">
+              <span 
+              onClick={() => {dispatch(deleteTodo(todo))}}
+              className="cursor-pointer hover:text-slate-500">
                 <AiTwotoneDelete />
               </span>
               <span className="cursor-pointer hover:text-slate-500">
