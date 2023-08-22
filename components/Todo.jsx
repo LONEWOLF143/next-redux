@@ -24,9 +24,9 @@ const SingleTodo = ({setEditTodo}) => {
 
   const todo = useSelector(state => state.todo.todoList)
   const dispatch = useDispatch(null)
+
   const updateTodo = (todo) => {
     setEditTodo(todo)
-
   }
   return (
 
@@ -59,7 +59,7 @@ const SingleTodo = ({setEditTodo}) => {
                 <AiTwotoneDelete />
               </span>
               <span
-              onClick={() => {dispatch(updateTodo(todo))}}
+              onClick={() => updateTodo(todo)}
                className="cursor-pointer hover:text-slate-500">
                 <AiTwotoneEdit />
               </span>

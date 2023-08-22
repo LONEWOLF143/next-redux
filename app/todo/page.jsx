@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 import Picker from "@emoji-mart/react";
@@ -13,7 +13,8 @@ const Todo = () => {
   const [showEmoji, setShowEmoji] = useState(false);
   const [text, setText] = useState("");
   const [editTodo, setEditTodo] = useState(null);
-  const dispatch = useDispatch(null)
+
+  const dispatch = useDispatch()
 
   // add emoji
   const addEmoji = (e) => {
@@ -23,9 +24,19 @@ const Todo = () => {
     let emoji = String.fromCodePoint(...codeArray);
     setText(text + emoji);
   };
-  console.log(editTodo)
+  useEffect(() => {
+    if(editTodo) {
+      setText(editTodo.text)
+    } else {
+      setText("")
+    }
+  },[editTodo])
   const handleSubmit = (e) => {
     e.preventDefault()
+    if(editTodo) {
+      console.log("edit")
+
+    } else {
       dispatch(
         addTodo({
           id: Math.floor(Math.random() * 100000),
@@ -37,6 +48,7 @@ const Todo = () => {
         })
       )
       setText("")
+    }
   }
 
   return (
