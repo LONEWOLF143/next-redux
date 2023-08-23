@@ -3,6 +3,7 @@ import CounterSlice from './Slices/CounterSlice'
 import TodoReducer from './Slices/TodoSlice'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import shopReducer from "./Slices/shoppingSlice"
 
 
 const persistConfig = {
@@ -12,6 +13,7 @@ const persistConfig = {
   const rootReducer = combineReducers({
     counter: CounterSlice,
     todo: TodoReducer,
+    shop: shopReducer
 
   })
    

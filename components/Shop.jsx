@@ -1,14 +1,15 @@
 "use client";
 
+import { addToCart } from "@/Redux/Slices/shoppingSlice";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Shop = () => {
-  const data = useSelector((state) => state.shop.data)
-  
+ const data = useSelector((state) => state.shop.data)
+ const dispatch = useDispatch(null)
   return (
     <div id="grid">
-      {data.map((item, i) => (
+      {data?.map((item, i) => (
         <div key={i} className="w-full bg-slate-700 rounded-md p-[1rem]">
           <img className="w-[70%] mx-auto" src={item.image_url} alt="img" />
           <div className="py-4">
@@ -16,6 +17,7 @@ const Shop = () => {
             <p>${item.price}</p>
           </div>
           <button
+          onClick={() => dispatch(addToCart(item))}
             className="bg-blue-700 w-full text-center mt-5 py-2 hover:bg-blue-800
           rounded-md">
             Add to Cart
