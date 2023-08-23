@@ -11,7 +11,8 @@ const persistConfig = {
   }
   const rootReducer = combineReducers({
     counter: CounterSlice,
-    todo: TodoReducer
+    todo: TodoReducer,
+
   })
    
   const persistedReducer = persistReducer(persistConfig, rootReducer)
