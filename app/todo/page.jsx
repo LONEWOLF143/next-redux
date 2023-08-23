@@ -7,7 +7,7 @@ import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import SingleTodo from "@/components/Todo";
 import { useDispatch } from "react-redux";
-import { addTodo } from "@/Redux/Slices/TodoSlice";
+import { addTodo, updateTodo } from "@/Redux/Slices/TodoSlice";
 
 const Todo = () => {
   const [showEmoji, setShowEmoji] = useState(false);
@@ -33,8 +33,20 @@ const Todo = () => {
   },[editTodo])
   const handleSubmit = (e) => {
     e.preventDefault()
+    if(!text) return
     if(editTodo) {
-      console.log("edit")
+      dispatch(updateTodo({
+        id: editTodo.id,
+        text,
+        date: new Date(),
+        completed: editTodo.completed
+
+      })
+  
+      )
+      setText("")
+      setShowEmoji(false)
+      setEditTodo(false)
 
     } else {
       dispatch(
@@ -48,6 +60,7 @@ const Todo = () => {
         })
       )
       setText("")
+      setShowEmoji(false)
     }
   }
 

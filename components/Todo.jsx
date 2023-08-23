@@ -5,7 +5,7 @@ import {
   AiOutlineCheckCircle,
 } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-import { deleteTodo } from "@/Redux/Slices/TodoSlice";
+import { deleteTodo, isCompleted } from "@/Redux/Slices/TodoSlice";
 
 import React, { useState } from "react";
 import moment from "moment/moment";
@@ -63,7 +63,9 @@ const SingleTodo = ({setEditTodo}) => {
                className="cursor-pointer hover:text-slate-500">
                 <AiTwotoneEdit />
               </span>
-              <span className="cursor-pointer hover:text-slate-500">
+              <span 
+              onClick={() => dispatch(isCompleted(todo))}
+              className="cursor-pointer hover:text-slate-500">
                 <AiOutlineCheckCircle />
               </span>
             </div>
