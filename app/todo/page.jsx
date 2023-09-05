@@ -52,7 +52,7 @@ const Todo = () => {
       dispatch(
         addTodo({
           id: Math.floor(Math.random() * 100000),
-          text: 'hellow redux',
+          text: text,
           date: new Date(),
           completed: false
 
